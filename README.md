@@ -38,7 +38,9 @@ Les catégories de la carte utilisent des éléments HTML `details` et restent u
 
 Compléter les mentions légales avec la raison sociale, l'immatriculation, le responsable de publication et l'hébergeur. Le lien complet Booqcloud n'est pas connu ; la carte est intégralement consultable sur le site, donc ce lien est facultatif. Le site d'inspiration Botna a renvoyé HTTP 403 lors de sa consultation.
 
-La publication et l'envoi du code local sur GitHub n'ont pas été effectués.
+Le code est disponible sur la branche `main` du dépôt GitHub. Pour activer l'hébergement : Settings → Pages → Deploy from a branch → branche `main`, dossier `/ (root)`, puis Save. Le fichier `.nojekyll` permet de servir directement le HTML/CSS/JavaScript.
+
+L'adresse prévue après activation est `https://roberthoang31-ops.github.io/thakyo-site/`. L'activation et la réponse de cette adresse doivent encore être vérifiées ; l'accès API GitHub/Pages est actuellement bloqué par la politique réseau de l'environnement.
 
 ## Vérification
 
