@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Découvrez THAKYO, restaurant à Cornebarrieu : un univers chaleureux, notre carte et les informations pour votre visite."
+    />
+    <meta name="theme-color" content="#171410" />
+    <title>THAKYO — Restaurant à Cornebarrieu</title>
+    <link rel="icon" href="logo-thakyo.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "THAKYO",
+        "telephone": "+33983502326",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "4 chemin de la Plane",
+          "postalCode": "31700",
+          "addressLocality": "Cornebarrieu",
+          "addressCountry": "FR"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "12:00",
+            "closes": "14:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "19:00",
+            "closes": "22:00"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <header class="header">
+      <a class="logo" href="#accueil" aria-label="THAKYO, accueil"
+        ><img
+          src="logo-thakyo.png"
+          alt="THAKYO"
+          width="206"
+          height="206"
+        /><span>RESTAURANT · CORNEBARRIEU</span></a
+      >
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        Menu
+      </button>
+      <nav id="navigation" aria-label="Navigation principale">
+        <a href="#maison">La maison</a><a href="#carte">La carte</a
+        ><a href="#ambiance">L’ambiance</a>
+        <a class="button button-outline" href="#visite"
+          >Préparer votre visite</a
+        >
+      </nav>
+    </header>
+    <main id="contenu">
+      <section class="hero" id="accueil" aria-labelledby="hero-title">
+        <picture class="hero-image">
+          <source
+            media="(max-width: 700px)"
+            srcset="e8cba225-b4ae-4e87-a577-5ded9bfb4cb4.png"
+            width="1086"
+            height="1448"
+          />
+          <img
+            src="5a6aee01-3081-435d-95c9-a042de98419e.png"
+            width="1448"
+            height="1086"
+            alt="Comptoir THAKYO en bois éclairé de lumière ambrée, sous les branches de cerisier"
+            fetchpriority="high"
+          />
+        </picture>
+        <div class="hero-copy">
+          <p class="eyebrow">THAKYO · CORNEBARRIEU</p>
+          <h1 id="hero-title">Une invitation<br />à <em>se retrouver.</em></h1>
+          <p>La chaleur d’un lieu.<br />Le plaisir d’un moment partagé.</p>
+          <a class="button" href="#carte">Découvrir la carte</a>
+        </div>
+        <div class="hero-bottom">
+          <span>BOIS · LUMIÈRE · SÉRÉNITÉ</span
+          ><a href="#maison">Explorer la maison</a>
+        </div>
+      </section>
+      <section class="section story" id="maison" aria-labelledby="story-title">
+        <div>
+          <p class="eyebrow">01 — LA MAISON</p>
+          <h2 id="story-title">Une adresse.<br /><em>Tout un univers.</em></h2>
+        </div>
+        <div class="story-copy">
+          <p class="lead">Bienvenue chez THAKYO,<br />à Cornebarrieu.</p>
+          <p>
+            Des matières chaleureuses, des lumières douces et une atmosphère
+            inspirée du Japon. Notre maison invite à ralentir, à échanger et à
+            profiter du temps passé ensemble.
+          </p>
+          <ul class="services" aria-label="Services disponibles">
+            <li>Terrasse</li>
+            <li>Plats végétaliens</li>
+          </ul>
+          <a class="text-link" href="#ambiance">Entrez dans notre univers</a>
+        </div>
+      </section>
+      <section class="ambiance" id="ambiance" aria-labelledby="ambiance-title">
+        <figure class="ambiance-photos">
+          <img
+            src="7ff4702b-c4b0-4413-9631-a5a8cd24d8e0.png"
+            width="1448"
+            height="1086"
+            alt="Trois vues de l’univers THAKYO : salle, bar et banquettes devant le mur végétal"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div class="ambiance-copy">
+          <p class="eyebrow">02 — L’AMBIANCE</p>
+          <h2 id="ambiance-title">La douceur<br /><em>des instants.</em></h2>
+          <p>
+            Les cerisiers en fleurs, les nuances de bois et les reflets ambrés
+            composent un décor intime. Un cadre pour vos conversations et vos
+            moments à table.
+          </p>
+        </div>
+      </section>
+      <section
+        class="section menu-section"
+        id="carte"
+        aria-labelledby="menu-title"
+      >
+        <div class="section-top">
+          <div>
+            <p class="eyebrow">03 — LA CARTE</p>
+            <h2 id="menu-title">
+              Du Japon à la Thaïlande,<br /><em>au fil des envies.</em>
+            </h2>
+          </div>
+          <p>
+            Sushis, plats au wok et douceurs.<br />Découvrez la carte et
+            composez votre moment.
+          </p>
+        </div>
+        <div class="formulas">
+          <article class="formula-card">
+            <p class="eyebrow">FORMULE MIDI</p>
+            <h3>Une pause, deux voyages.</h3>
+            <p class="formula-price">15,50 €</p>
+            <div class="lunch-options">
+              <div>
+                <h4>Japon</h4>
+                <p>
+                  Assortiment sushi et maki<br />Soupe miso<br />Salade de chou
+                </p>
+              </div>
+              <div>
+                <h4>Thaï</h4>
+                <p>Pad thaï poulet<br />Soupe miso<br />Salade de chou</p>
+              </div>
+            </div>
+          </article>
+          <article class="formula-card child-menu">
+            <p class="eyebrow">MENU ENFANT · MOINS DE 8 ANS</p>
+            <h3>Pour les petits gourmands.</h3>
+            <p class="formula-price">13,50 €</p>
+            <p>
+              Nems poulet — 2 pièces<br />Nigiri saumon — 2 pièces<br />Pad thaï
+              poulet
+            </p>
+          </article>
+        </div>
+        <div class="platters">
+          <h3>Plateaux composés</h3>
+          <p class="menu-intro">
+            À partager ou pas ! Tous nos plateaux sont accompagnés d’une soupe
+            miso et d’une salade de chou.
+          </p>
+          <dl class="platter-list">
+            <div>
+              <dt>Assortiment maki <span>20 pièces</span></dt>
+              <dd>23,50 €</dd>
+            </div>
+            <div>
+              <dt>Assortiment sushi <span>12 pièces</span></dt>
+              <dd>21,50 €</dd>
+            </div>
+            <div>
+              <dt>Assortiment sashimi <span>18 pièces</span></dt>
+              <dd>24,50 €</dd>
+            </div>
+            <div>
+              <dt>
+                Thakyo pour 2 personnes
+                <span
+                  >38 pièces · Café ou assortiment de gâteaux mochi inclus</span
+                >
+              </dt>
+              <dd>54,50 €</dd>
+            </div>
+          </dl>
+        </div>
+        <p class="menu-help">Ouvrez une catégorie pour découvrir les plats.</p>
+        <div class="menu-categories">
+          <details class="menu-category" open>
+            <summary>
+              <span>Nigiris<small>4 pièces</small></span>
+            </summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Saumon</dt>
+                <dd>9,50 €</dd>
+              </div>
+              <div>
+                <dt>Thon</dt>
+                <dd>10,50 €</dd>
+              </div>
+              <div>
+                <dt>Daurade</dt>
+                <dd>9,50 €</dd>
+              </div>
+              <div>
+                <dt>Unagi</dt>
+                <dd>9,50 €</dd>
+              </div>
+              <div>
+                <dt>Poulpe</dt>
+                <dd>9,50 €</dd>
+              </div>
+              <div>
+                <dt>Ebi</dt>
+                <dd>10,50 €</dd>
+              </div>
+              <div>
+                <dt>Ikura</dt>
+                <dd>11,50 €</dd>
+              </div>
+              <div>
+                <dt>Signature Thakyo</dt>
+                <dd>12,50 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary>
+              <span>Makis<small>4 pièces</small></span>
+            </summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Saumon</dt>
+                <dd>6,50 €</dd>
+              </div>
+              <div>
+                <dt>Thon</dt>
+                <dd>7,50 €</dd>
+              </div>
+              <div>
+                <dt>Ebi</dt>
+                <dd>7,50 €</dd>
+              </div>
+              <div>
+                <dt>Concombre</dt>
+                <dd>5,50 €</dd>
+              </div>
+              <div>
+                <dt>Avocat</dt>
+                <dd>6,50 €</dd>
+              </div>
+              <div>
+                <dt>Fromage frais</dt>
+                <dd>5,50 €</dd>
+              </div>
+              <div>
+                <dt>Ebi Fry</dt>
+                <dd>9,50 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary>
+              <span>Californias<small>8 pièces</small></span>
+            </summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Saumon avocat</dt>
+                <dd>7,90 €</dd>
+              </div>
+              <div>
+                <dt>Saumon fromage</dt>
+                <dd>8,90 €</dd>
+              </div>
+              <div>
+                <dt>Thon avocat</dt>
+                <dd>9,50 €</dd>
+              </div>
+              <div>
+                <dt>Surimi avocat</dt>
+                <dd>7,90 €</dd>
+              </div>
+              <div>
+                <dt>Dragon</dt>
+                <dd>10,90 €</dd>
+              </div>
+              <div>
+                <dt>Rainbow</dt>
+                <dd>10,90 €</dd>
+              </div>
+              <div>
+                <dt>Poulet avocat</dt>
+                <dd>7,90 €</dd>
+              </div>
+              <div>
+                <dt>Poulet crispy</dt>
+                <dd>8,90 €</dd>
+              </div>
+              <div>
+                <dt>Foie gras</dt>
+                <dd>10,90 €</dd>
+              </div>
+              <div>
+                <dt>Foie gras et mangue</dt>
+                <dd>11,90 €</dd>
+              </div>
+              <div>
+                <dt>Signature Thakyo</dt>
+                <dd>13,90 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary>
+              <span>Sashimis<small>10 pièces</small></span>
+            </summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Saumon</dt>
+                <dd>13,50 €</dd>
+              </div>
+              <div>
+                <dt>Thon</dt>
+                <dd>13,50 €</dd>
+              </div>
+              <div>
+                <dt>Saumon / thon</dt>
+                <dd>15,50 €</dd>
+              </div>
+              <div>
+                <dt>Daurade</dt>
+                <dd>13,50 €</dd>
+              </div>
+              <div>
+                <dt>Poulpe</dt>
+                <dd>13,50 €</dd>
+              </div>
+              <div>
+                <dt>Mixte</dt>
+                <dd>14,50 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary><span>Entrées</span></summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Rouleaux de printemps</dt>
+                <dd>4,50 €</dd>
+              </div>
+              <div>
+                <dt>Raviolis frits</dt>
+                <dd>6,50 €</dd>
+              </div>
+              <div>
+                <dt>Nems porc</dt>
+                <dd>6,00 €</dd>
+              </div>
+              <div>
+                <dt>Nems poulet</dt>
+                <dd>6,00 €</dd>
+              </div>
+              <div>
+                <dt>Nems crevettes</dt>
+                <dd>6,50 €</dd>
+              </div>
+              <div>
+                <dt>Nems au chèvre et miel</dt>
+                <dd>7,50 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary><span>Salades</span></summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Salade de chou</dt>
+                <dd>4,90 €</dd>
+              </div>
+              <div>
+                <dt>Salade wakame</dt>
+                <dd>5,90 €</dd>
+              </div>
+              <div>
+                <dt>Yum fruits de mer</dt>
+                <dd>7,90 €</dd>
+              </div>
+              <div>
+                <dt>Salade papaye</dt>
+                <dd>12,90 €</dd>
+              </div>
+              <div>
+                <dt>Salade Bo Bun — nem poulet</dt>
+                <dd>12,90 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary><span>Soupes</span></summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Tom Yum poulet ou crevettes</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Tom Ka poulet</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Soupe pho bœuf boulettes</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Soupe ravioli porc laqué</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Soupe udon lao poulet</dt>
+                <dd>14,90 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary><span>Nouilles</span></summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Nouilles veggie</dt>
+                <dd>12,50 €</dd>
+              </div>
+              <div>
+                <dt>Nouilles poulet</dt>
+                <dd>14,50 €</dd>
+              </div>
+              <div>
+                <dt>Nouilles crevettes</dt>
+                <dd>15,50 €</dd>
+              </div>
+              <div>
+                <dt>Pad thaï poulet</dt>
+                <dd>14,50 €</dd>
+              </div>
+              <div>
+                <dt>Pad thaï crevettes</dt>
+                <dd>15,50 €</dd>
+              </div>
+              <div>
+                <dt>Pad thaï veggie</dt>
+                <dd>12,50 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary><span>Bol et poké</span></summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Tartare saumon</dt>
+                <dd>14,50 €</dd>
+              </div>
+              <div>
+                <dt>Tartare thon</dt>
+                <dd>16,50 €</dd>
+              </div>
+              <div>
+                <dt>Chirashi saumon</dt>
+                <dd>14,50 €</dd>
+              </div>
+              <div>
+                <dt>Chirashi saumon / thon</dt>
+                <dd>16,50 €</dd>
+              </div>
+              <div>
+                <dt>Poké saumon</dt>
+                <dd>14,50 €</dd>
+              </div>
+              <div>
+                <dt>Poké saumon / thon</dt>
+                <dd>16,50 €</dd>
+              </div>
+              <div>
+                <dt>Poké poulet</dt>
+                <dd>14,50 €</dd>
+              </div>
+              <div>
+                <dt>Poké veggie</dt>
+                <dd>12,50 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary><span>Wok Shop</span></summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Riz poulet crispy</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Riz poulet vapeur</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Riz porc crispy</dt>
+                <dd>15,90 €</dd>
+              </div>
+              <div>
+                <dt>Riz porc laqué</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Laab bœuf</dt>
+                <dd>15,90 €</dd>
+              </div>
+              <div>
+                <dt>Laab poulet</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Bœuf basilic</dt>
+                <dd>15,90 €</dd>
+              </div>
+              <div>
+                <dt>Poulet basilic</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Riz sauté poulet basilic</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Porc basilic</dt>
+                <dd>14,90 €</dd>
+              </div>
+              <div>
+                <dt>Crevettes basilic</dt>
+                <dd>16,90 €</dd>
+              </div>
+            </dl>
+          </details>
+          <details class="menu-category">
+            <summary><span>Desserts</span></summary>
+            <dl class="dish-list">
+              <div>
+                <dt>Assortiment de gâteaux mochi</dt>
+                <dd>5,50 €</dd>
+              </div>
+              <div>
+                <dt>Perles de coco — 2 pièces</dt>
+                <dd>5,50 €</dd>
+              </div>
+              <div>
+                <dt>Ananas frais</dt>
+                <dd>5,50 €</dd>
+              </div>
+              <div>
+                <dt>Mangue fraîche</dt>
+                <dd>6,50 €</dd>
+              </div>
+              <div>
+                <dt>Café gourmand</dt>
+                <dd>5,50 €</dd>
+              </div>
+              <div>
+                <dt>Thé gourmand</dt>
+                <dd>6,50 €</dd>
+              </div>
+              <div>
+                <dt>Riz gluant mangue</dt>
+                <dd>7,50 €</dd>
+              </div>
+            </dl>
+          </details>
+        </div>
+        <p class="allergen-note">
+          Une allergie ou une demande particulière ?
+          <a href="tel:+33983502326">Contactez notre équipe</a> avant de
+          commander.
+        </p>
+      </section>
+      <section class="visit section" id="visite" aria-labelledby="visit-title">
+        <div>
+          <p class="eyebrow">04 — VOTRE VISITE</p>
+          <h2 id="visit-title">À bientôt,<br /><em>chez THAKYO.</em></h2>
+          <p>
+            Une question, une envie de venir ?<br />Appelez-nous pour préparer
+            votre visite.
+          </p>
+          <div class="visit-actions">
+            <a class="button" href="tel:+33983502326">Appeler le restaurant</a>
+            <a
+              class="text-link"
+              href="https://www.google.com/maps/search/?api=1&amp;query=THAKYO%204%20Chemin%20de%20la%20Plane%2031700%20Cornebarrieu"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Voir l’itinéraire<span class="sr-only"> (nouvel onglet)</span></a
+            >
+          </div>
+        </div>
+        <div class="visit-details">
+          <div>
+            <h3>Nous trouver</h3>
+            <address>
+              4 chemin de la Plane<br />31700 Cornebarrieu, France
+            </address>
+          </div>
+          <div>
+            <h3>Nous appeler</h3>
+            <a class="phone-link" href="tel:+33983502326">09 83 50 23 26</a>
+          </div>
+          <div>
+            <h3 id="hours-title">Les horaires</h3>
+            <table class="hours" aria-labelledby="hours-title">
+              <tbody>
+                <tr>
+                  <th scope="row">Lundi</th>
+                  <td>Fermé</td>
+                </tr>
+                <tr>
+                  <th scope="row">Mardi</th>
+                  <td><span>12:00–14:00</span><span>19:00–22:00</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Mercredi</th>
+                  <td><span>12:00–14:00</span><span>19:00–22:00</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Jeudi</th>
+                  <td><span>12:00–14:00</span><span>19:00–22:00</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Vendredi</th>
+                  <td><span>12:00–14:00</span><span>19:00–22:00</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Samedi</th>
+                  <td><span>12:00–14:00</span><span>19:00–22:00</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Dimanche</th>
+                  <td>19:00–22:00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer-top">
+        <a class="logo" href="#accueil"
+          ><img
+            src="logo-thakyo.png"
+            alt="THAKYO"
+            width="206"
+            height="206"
+          /><span>RESTAURANT · CORNEBARRIEU</span></a
+        >
+        <p>Le plaisir de se retrouver.</p>
+        <a class="text-link" href="#accueil">Retour en haut</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> THAKYO</span
+        ><button type="button" class="legal-trigger" data-open-legal>
+          Informations légales
+        </button>
+      </div>
+      <noscript
+        ><details class="legal-fallback">
+          <summary>Informations légales</summary>
+          <p>
+            Site en préparation. Les informations sur l’éditeur,
+            l’immatriculation, le responsable de publication et l’hébergeur
+            restent à compléter. Aucun formulaire ni outil de suivi n’est
+            installé.
+          </p>
+        </details></noscript
+      >
+    </footer>
+    <dialog id="legal-dialog" aria-labelledby="legal-title">
+      <div class="dialog-top">
+        <h2 id="legal-title">Informations légales</h2>
+        <button
+          type="button"
+          data-close-legal
+          aria-label="Fermer les informations légales"
+        >
+          Fermer
+        </button>
+      </div>
+      <p>
+        Site en préparation. La raison sociale, l’identité de l’éditeur, ses
+        coordonnées, les informations d’immatriculation, le responsable de
+        publication et l’hébergeur doivent être renseignés avant publication.
+      </p>
+      <p>
+        Ce prototype ne comporte ni formulaire, ni outil de suivi, ni système de
+        réservation.
+      </p>
+    </dialog>
+  </body>
+</html>
