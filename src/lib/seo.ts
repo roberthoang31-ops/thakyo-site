@@ -97,6 +97,7 @@ export const restaurantJsonLd = {
   name: restaurant.name,
   description,
   telephone: restaurant.phoneInternational,
+  acceptsReservations: restaurant.reservationUrl,
   servesCuisine: ["Japanese", "Thai"],
   address: {
     "@type": "PostalAddress",

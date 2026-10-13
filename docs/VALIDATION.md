@@ -43,4 +43,14 @@ Captures et résultats conservés dans `/workspace/thakyo-next-review/` :
 
 ## Limites
 
-Safari et Firefox n'ont pas été testés. Vercel, le domaine final et ses DNS n'ont pas été configurés. Les boutons réservation et commande à emporter passent par téléphone. L'identité légale de l'exploitant reste à compléter avant publication.
+Safari et Firefox n'ont pas été testés. Vercel, le domaine final et ses DNS n'ont pas été configurés. Les boutons réservation et commande à emporter redirigent désormais vers les services Google et Booqcloud fournis par le restaurant, avec téléphone en alternative. L'identité légale de l'exploitant reste à compléter avant publication.
+
+## Mise à jour des liens de réservation et commande
+
+- Réservation Google : lien centralisé dans `restaurant.reservationUrl`, utilisé dans les deux navigations, l’accueil et la section réservation.
+- Commande Booqcloud : lien centralisé dans `restaurant.orderUrl`, utilisé dans la section à emporter.
+- Ouverture dans un nouvel onglet annoncée aux lecteurs d’écran, avec `noopener noreferrer`. Téléphone conservé dans les deux sections.
+- Lint, TypeScript et build exécutés à nouveau avec succès.
+- Vérification Chromium du build à 1440, 390 et 320 px : destinations et attributs des cinq liens corrects, alternatives téléphone présentes, données structurées de réservation valides, aucun débordement ni erreur JavaScript.
+- Captures : `/workspace/thakyo-next-review/services-1440.png`, `services-390.png` et `services-320.png`.
+- Le proxy de l’environnement refuse l’accès aux deux prestataires (HTTP 403). Leur contenu et leur parcours de réservation/commande ne sont donc pas validés par ces contrôles locaux. Aucune transaction réelle effectuée.

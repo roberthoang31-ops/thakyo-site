@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Menu } from "lucide-react";
 import { useRef } from "react";
+import { restaurant } from "@/data/restaurant";
 
 const links = [
   ["Accueil", "#accueil"],
@@ -49,8 +50,14 @@ export function SiteHeader() {
               {label}
             </a>
           ))}
-          <a href="#reservation" className="button button-outline">
+          <a
+            href={restaurant.reservationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button-outline"
+          >
             Réserver <ArrowUpRight size={15} aria-hidden="true" />
+            <span className="sr-only"> sur Google (nouvel onglet)</span>
           </a>
         </nav>
         <details
@@ -78,11 +85,14 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="#reservation"
+              href={restaurant.reservationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={closeMenu}
               className="m-5 flex items-center justify-between bg-gold px-5 py-4 text-sm text-background"
             >
               Réserver une table <ArrowUpRight size={16} aria-hidden="true" />
+              <span className="sr-only"> sur Google (nouvel onglet)</span>
             </Link>
           </nav>
         </details>

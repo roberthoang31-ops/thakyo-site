@@ -34,16 +34,23 @@ export function RestaurantServices() {
           <em className="text-gold">beau moment.</em>
         </h2>
         <p className="mt-6 max-w-sm text-sm leading-7 text-muted">
-          Un dîner à deux, une table entre amis ou un repas en famille.
-          Appelez-nous pour réserver votre place chez THAKYO.
+          Un dîner à deux, une table entre amis ou un repas en famille. Réservez
+          votre place chez THAKYO en ligne avec Google.
         </p>
-        <a href={restaurant.phoneHref} className="button mt-8">
-          <Phone size={16} aria-hidden="true" />
+        <a
+          href={restaurant.reservationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="button mt-8"
+        >
+          Réserver en ligne <ArrowUpRight size={16} aria-hidden="true" />
+          <span className="sr-only"> sur Google (nouvel onglet)</span>
+        </a>
+        <p className="mt-5 text-xs text-muted">Vous préférez nous appeler ?</p>
+        <a href={restaurant.phoneHref} className="text-link mt-1 text-sm">
+          <Phone size={15} aria-hidden="true" />
           {restaurant.phone}
         </a>
-        <p className="mt-4 text-[11px] text-muted">
-          Réservation par téléphone, auprès de notre équipe.
-        </p>
       </section>
       <section
         id="emporter"
@@ -66,15 +73,25 @@ export function RestaurantServices() {
           <em className="text-gold">chez vous.</em>
         </h2>
         <p className="mt-6 max-w-sm text-sm leading-7 text-muted">
-          Choisissez vos envies dans la carte, puis appelez le restaurant pour
-          organiser votre commande à emporter et convenir du retrait.
+          Retrouvez notre carte sur Booqcloud et passez votre commande en ligne
+          pour profiter des saveurs de THAKYO chez vous.
         </p>
-        <a href={restaurant.phoneHref} className="button button-outline mt-8">
-          Commander par téléphone <ArrowUpRight size={16} aria-hidden="true" />
+        <a
+          href={restaurant.orderUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="button button-outline mt-8"
+        >
+          Commander en ligne <ArrowUpRight size={16} aria-hidden="true" />
+          <span className="sr-only"> sur Booqcloud (nouvel onglet)</span>
         </a>
-        <p className="mt-4 text-[11px] text-muted">
-          Disponibilité des plats et horaire à confirmer lors de l’appel.
+        <p className="mt-5 text-xs text-muted">
+          Une question sur votre commande ?
         </p>
+        <a href={restaurant.phoneHref} className="text-link mt-1 text-sm">
+          <Phone size={15} aria-hidden="true" />
+          {restaurant.phone}
+        </a>
       </section>
     </div>
   );

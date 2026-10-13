@@ -47,12 +47,16 @@ Les images d'accueil sont sélectionnées selon l'écran et optimisées par Next
 
 - Identité noir, bois et doré ; logo et photographies du décor actuel.
 - Carte : 80 plats, 11 catégories, 4 plateaux, formules midi et menu enfant.
-- Réservation et commande à emporter par téléphone au 09 83 50 23 26.
+- Réservation en ligne via [Google](https://www.google.com/maps/reserve/v/dine/c/q8CeveU3FLM?hl=fr).
+- Commande à emporter via [Booqcloud](https://france.booqcloud.com/webshop/Order2POSThakyo/).
+- Téléphone : 09 83 50 23 26, avec liens d'appel conservés.
 - Adresse : 4 chemin de la Plane, 31700 Cornebarrieu.
 - Lundi fermé ; mardi à samedi 12h–14h et 19h–22h ; dimanche 19h–22h.
 - Terrasse, plats végétaliens et lien d'itinéraire.
 
-Les boutons de réservation et de commande ouvrent le téléphone. Aucun paiement, gestion de commandes ou système de réservation en ligne n'est connecté.
+Les boutons de réservation et de commande redirigent vers les services externes fournis par le restaurant. Le site n'intègre ni leur API ni un backend de réservation ou de paiement. Les URL sont centralisées dans `src/data/restaurant.ts`.
+
+La vérification directe de ces deux services depuis l'environnement de développement est bloquée par son proxy (HTTP 403). Aucune réservation, commande ou transaction réelle n'a été effectuée ; le parcours externe reste à vérifier dans un navigateur disposant de l'accès.
 
 ## Référencement local
 

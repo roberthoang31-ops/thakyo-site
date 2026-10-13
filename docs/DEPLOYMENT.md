@@ -14,7 +14,7 @@ npm run build
 npm run start
 ```
 
-Ouvrir `http://localhost:3000`, puis vérifier l’accueil, la navigation mobile, la carte, les images, les horaires et les liens d’appel. Le serveur lancé par `npm run start` permet de contrôler la version compilée.
+Ouvrir `http://localhost:3000`, puis vérifier l’accueil, la navigation mobile, la carte, les images, les horaires, les liens d’appel et les redirections de réservation et de commande. Le serveur lancé par `npm run start` permet de contrôler la version compilée.
 
 Conserver les modifications sur une branche dédiée pour la revue. Le succès du build local ne confirme ni une publication ni le fonctionnement d’un futur domaine.
 
@@ -80,11 +80,11 @@ Une fois l’adresse définitive disponible, le propriétaire peut vérifier son
 - **Coordonnées** : 4 chemin de la Plane, 31700 Cornebarrieu ; 09 83 50 23 26.
 - **Horaires** : lundi fermé ; mardi à samedi, 12 h–14 h et 19 h–22 h ; dimanche, 19 h–22 h.
 - **Carte et tarifs** : faire confirmer les informations transcrites de la carte fournie, notamment les disponibilités et prix actuels.
-- **Réservation et vente à emporter** : les boutons permettent d’appeler le restaurant. Il n’y a pas encore de confirmation de réservation, panier, paiement ou prise de commande en ligne. L’intégration d’un prestataire demande son URL exacte ou sa configuration.
+- **Réservation et vente à emporter** : les boutons redirigent vers [la réservation Google](https://www.google.com/maps/reserve/v/dine/c/q8CeveU3FLM?hl=fr) et [la commande Booqcloud](https://france.booqcloud.com/webshop/Order2POSThakyo/), aux adresses fournies par le restaurant. Le téléphone reste disponible. Vérifier que chaque service affiche bien THAKYO et propose le parcours attendu avant publication ; aucune réservation ni commande réelle n'a été effectuée pendant cette préparation.
 - **Mentions légales** : compléter l’identité juridique de l’éditeur, ses coordonnées légales, l’immatriculation, le responsable de publication et les coordonnées de l’hébergeur. Ajouter les informations applicables à l’entreprise, dont TVA et médiation de la consommation, si nécessaires.
 - **Photos et logo** : faire valider le rendu et l’autorisation de publication des visuels fournis.
 
-Le site vitrine actuel n’a pas de backend, de base de données ni de service de paiement à configurer. Aucun secret applicatif n’est nécessaire. Les éventuels futurs identifiants de prestataires doivent être enregistrés dans les variables privées Vercel, jamais dans Git ou dans une variable `NEXT_PUBLIC_`.
+Le site vitrine actuel n’a pas de backend, de base de données ni de service de paiement à configurer. La réservation et la commande sont prises en charge sur les sites externes ; aucune API de prestataire n’est intégrée. Les liens sont centralisés dans `src/data/restaurant.ts` et ne nécessitent aucun secret applicatif. Les éventuels futurs identifiants de prestataires doivent être enregistrés dans les variables privées Vercel, jamais dans Git ou dans une variable `NEXT_PUBLIC_`.
 
 ## 6. Publication après accord
 
@@ -97,5 +97,7 @@ L’ancienne configuration GitHub Pages ne publie pas automatiquement cette appl
 ## Limites de cette préparation
 
 Ces instructions ne prouvent pas qu’un compte ou projet Vercel est configuré, qu’un déploiement distant réussit ou qu’un domaine est actif. Ces points doivent être vérifiés lors de l’étape autorisée correspondante. Les résultats effectifs des contrôles locaux sont consignés dans le compte rendu de livraison.
+
+Le proxy de l’environnement de développement bloque les accès directs aux liens de réservation Google et de commande Booqcloud (HTTP 403). Le fonctionnement de leurs parcours externes reste à vérifier dans un navigateur disposant de l’accès ; les contrôles locaux ne valident pas une réservation, une commande ou un paiement réel.
 
 Documentation officielle : [Next.js sur Vercel](https://vercel.com/docs/frameworks/full-stack/nextjs), [CLI de déploiement](https://vercel.com/docs/cli/deploy), [intégration Git](https://vercel.com/docs/git), [variables d’environnement](https://vercel.com/docs/environment-variables), [domaines](https://vercel.com/docs/domains).

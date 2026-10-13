@@ -64,10 +64,13 @@ export function Hero() {
             Découvrir la carte <ArrowUpRight size={17} aria-hidden="true" />
           </a>
           <a
-            href="#reservation"
+            href={restaurant.reservationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="button border border-cream/50 bg-black/20 text-cream hover:bg-cream hover:text-background"
           >
             Réserver une table
+            <span className="sr-only"> sur Google (nouvel onglet)</span>
           </a>
         </div>
       </div>
