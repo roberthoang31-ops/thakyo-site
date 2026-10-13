@@ -1,0 +1,135 @@
+@import "tailwindcss" source("../");
+
+@theme {
+  --color-background: #15130f;
+  --color-surface: #201c16;
+  --color-cream: #f5ecdf;
+  --color-gold: #d5ae78;
+  --color-gold-light: #e6c697;
+  --color-muted: #baae9e;
+  --color-line: #44392a;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 28px;
+  }
+  body {
+    @apply bg-background font-body text-cream antialiased;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-background);
+  }
+  a,
+  button,
+  summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 5px;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .container-shell {
+    width: min(1280px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+  .section-space {
+    @apply py-20 md:py-28;
+  }
+  .eyebrow {
+    @apply mb-6 text-[10px] font-medium uppercase tracking-[.2em] text-gold;
+  }
+  .section-title {
+    @apply font-display text-[clamp(2.6rem,4.5vw,4.6rem)] leading-[1.12] tracking-[-.035em];
+  }
+  .section-title em {
+    font-weight: 400;
+  }
+  .button {
+    @apply inline-flex min-h-12 items-center justify-center gap-4 border border-gold bg-gold px-6 py-3.5 text-xs font-medium leading-5 text-background transition-colors hover:bg-gold-light;
+  }
+  .button-outline {
+    @apply bg-transparent text-gold hover:bg-gold hover:text-background;
+  }
+  .text-link {
+    @apply inline-flex min-h-11 items-center gap-5 border-b border-gold py-2 text-sm transition-colors hover:text-gold;
+  }
+  .nav-link {
+    @apply inline-flex min-h-11 items-center text-cream/85 transition-colors hover:text-gold;
+  }
+  .service-tag {
+    @apply inline-flex items-center gap-2 border border-line px-4 py-2.5;
+  }
+  .site-header {
+    position: relative;
+    z-index: 50;
+  }
+  .mobile-menu-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-background);
+    border-block: 1px solid var(--color-line);
+    box-shadow: 0 20px 30px #0006;
+  }
+  .menu-feature {
+    @apply border border-line bg-background p-7 sm:p-9;
+  }
+  .contact-row {
+    @apply flex gap-5 border-b border-line py-6;
+  }
+  .contact-row:first-child {
+    padding-top: 0;
+  }
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+    padding: 12px 18px;
+    background: var(--color-cream);
+    color: var(--color-background);
+    transform: translateY(-200%);
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-shell {
+    width: min(1280px, calc(100% - 112px));
+  }
+}
+@media (max-width: 380px) {
+  .container-shell {
+    width: calc(100% - 36px);
+  }
+  .hero {
+    min-height: 740px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms;
+    animation-duration: 0.01ms;
+  }
+}
