@@ -1,56 +1,54 @@
-# Validation de la migration Next.js
+# Validation — galerie, carte PDF et accès aux services
 
-## Résultat
+## Version préparée
 
-La version locale compilée fonctionne. Aucun déploiement de cette migration en production n'a été effectué.
+La page d’accueil conserve le style sombre et doré et les sections concept, réservation, commande à emporter et contact. Elle contient désormais une galerie de quatre photographies réelles du restaurant, les deux actions dans l’en-tête et le hero, une barre fixe sur mobile et une section « Notre carte » pour le PDF. Les entrées « Galerie » et « Carte PDF » sont dans la navigation.
 
-## Installation et contrôles
+Aucun PDF ni aucune photo de plat n’est disponible dans le projet. Les deux boutons PDF sont donc désactivés, avec une explication visible. Leur activation et le téléchargement du document réel restent à vérifier après réception du fichier. La galerie présente uniquement le décor fourni par le restaurant. Aucun lien fictif n’a été ajouté.
 
-- Node.js 24.19.0, Next.js 16.4.0, React 19.3.0, TypeScript 5.9.3, Tailwind 4.3.3 et Lucide React 1.55.0.
-- Installation répétable effectuée avec `npm ci`, depuis `package-lock.json`.
-- `npm run lint` : 17 fichiers contrôlés par Biome, aucune erreur ni avertissement.
-- `npm run typecheck` : génération des types de routes et TypeScript réussis.
-- `npm run build` : réussi ; accueil, page 404, robots et sitemap générés.
-- `npm audit` : 0 vulnérabilité signalée, dépendances de développement incluses.
-- `npm run start` : accueil HTTP 200 ; `npm run dev` : accueil HTTP 200.
+## Contrôles exécutés
+
+- `npm run lint` : 22 fichiers contrôlés, aucune erreur ni avertissement.
+- `npm run typecheck` : génération des types et contrôle TypeScript réussis.
+- `npm run build` : build Next.js natif réussi.
+- `NEXT_PUBLIC_SITE_URL=https://roberthoang31-ops.github.io npm run build:pages` : export statique réussi, avec préfixe `/thakyo-site` et `out/.nojekyll`.
+- Aucun ajout ni changement de dépendance ; le fichier de verrouillage reste inchangé.
 - `git diff --check` : réussi.
 
-Biome remplace l'outillage ESLint initialement évalué afin de conserver un ensemble compatible et sans l'avis de sécurité transitif trouvé dans cette version de la configuration ESLint Next. Les règles recommandées de Biome restent activées.
+## Vérifications navigateur
 
-## Navigateur
+Chromium via Playwright sur le serveur Next.js et sur un serveur statique servant réellement l’export sous `/thakyo-site/`. Largeurs contrôlées : 1440, 768, 390 et 320 px, hauteur 900 px.
 
-Chromium local via Playwright, sur le build de production, largeurs 1440, 768, 390 et 320 px (hauteur 900, densité 1) :
+- Accueil HTTP 200 et toutes les sections conservées.
+- Photos chargées, aucun débordement horizontal ni erreur JavaScript ou requête en échec sur les parcours finaux.
+- Commande et réservation visibles dans l’en-tête et l’accueil, avec les destinations fournies par THAKYO et les attributs d’ouverture externe attendus.
+- Navigation mobile : ouverture, déplacement jusqu’à `#galerie`, fermeture après clic, Échap et retour du focus.
+- Galerie : quatre photos, agrandissement, précédent/suivant, flèches clavier et passage de la dernière à la première image ; fermeture par bouton, Échap et arrière-plan ; retour du focus à la vignette ; défilement de page restauré.
+- Barre d’actions visible seulement sous 768 px ; hauteur inférieure à l’espace réservé ; pied de page entièrement accessible au-dessus de la barre en fin de défilement.
+- Carte interactive retirée ; deux boutons PDF désactivés et aucun lien vers un PDF inexistant.
+- Sans JavaScript : menu mobile natif et ouverture des originaux depuis les vignettes fonctionnels.
+- Données structurées Restaurant valides et lien de réservation confirmé.
+- À la racine sans origine configurée : `noindex`, robots bloquants et sitemap vide.
+- Pour Pages avec origine configurée : images, canonique, données structurées, robots et sitemap utilisent `/thakyo-site/`.
 
-- Aucun débordement horizontal.
-- Toutes les photos et les icônes sont affichées.
-- Aucune erreur console, requête échouée ou réponse HTTP d'erreur.
-- Navigation mobile : ouverture, fermeture par lien, Échap et retour du focus validés.
-- Carte : 11 catégories et 80 plats présents, ouverture et fermeture validées.
-- Liens téléphone et ancres contrôlés ; aucun véritable appel émis.
-- Navigation et catégories de carte utilisables sans JavaScript.
-- JSON-LD Restaurant présent et parsable avec l'adresse, le téléphone, les cuisines et les horaires fournis.
-- Sans URL de production configurée : `noindex`, robots interdisant l'indexation et sitemap vide, comme prévu.
+Le contrôle de l’export a révélé que le composant de routage utilisé pour les ancres mobiles pouvait déclencher une requête inutile et empêcher le déplacement à la section. Ces liens sont maintenant des ancres HTML natives. Le parcours a été vérifié à nouveau après correction.
 
-La marge du hero sur mobile a été corrigée après la première capture, puis les tests ont été exécutés à nouveau sur le build final. Les captures finales ont été inspectées.
+## Captures et résultats
 
-## Preuves locales
+Fichiers locaux dans `/workspace/thakyo-gallery-review/` :
 
-Captures et résultats conservés dans `/workspace/thakyo-next-review/` :
+- `root-results.json` et `pages-results.json` : résultats par largeur.
+- `root-1440-accueil.png`, `root-390-accueil.png` et leurs variantes `pages-…` : accueil ordinateur et mobile.
+- `pages-carte-desktop.png`, `pages-galerie-desktop.png` : nouvelles sections.
+- `root-…-full.png`, `pages-…-full.png` : captures intégrales aux quatre largeurs.
+- `root-…-lightbox.png`, `pages-…-lightbox.png` : agrandissement ordinateur et mobile.
 
-- `desktop-accueil.png`, `mobile-accueil.png` : aperçu de l'accueil.
-- `desktop.png`, `768.png`, `mobile.png`, `320.png` : pages complètes.
-- `results.json` : résultats des contrôles navigateur.
+Les captures de l’accueil, de la carte, de la galerie et de l’agrandissement ont été inspectées visuellement.
 
-## Limites
+## Limites et publication
 
-Safari et Firefox n'ont pas été testés. Vercel, le domaine final et ses DNS n'ont pas été configurés. Les boutons réservation et commande à emporter redirigent désormais vers les services Google et Booqcloud fournis par le restaurant, avec téléphone en alternative. L'identité légale de l'exploitant reste à compléter avant publication.
+Safari et Firefox n’ont pas été testés. Le fonctionnement des parcours externes Google et Booqcloud n’est pas confirmé depuis cet environnement, dont le proxy a refusé ces destinations ; les destinations des liens locaux ont été vérifiées, sans réservation, commande ou paiement réel.
 
-## Mise à jour des liens de réservation et commande
+Le PDF et les photos de plats restent à fournir. Le remplacement des fichiers et liens est décrit dans le README. Les informations légales restent celles du site en préparation.
 
-- Réservation Google : lien centralisé dans `restaurant.reservationUrl`, utilisé dans les deux navigations, l’accueil et la section réservation.
-- Commande Booqcloud : lien centralisé dans `restaurant.orderUrl`, utilisé dans la section à emporter.
-- Ouverture dans un nouvel onglet annoncée aux lecteurs d’écran, avec `noopener noreferrer`. Téléphone conservé dans les deux sections.
-- Lint, TypeScript et build exécutés à nouveau avec succès.
-- Vérification Chromium du build à 1440, 390 et 320 px : destinations et attributs des cinq liens corrects, alternatives téléphone présentes, données structurées de réservation valides, aucun débordement ni erreur JavaScript.
-- Captures : `/workspace/thakyo-next-review/services-1440.png`, `services-390.png` et `services-320.png`.
-- Le proxy de l’environnement refuse l’accès aux deux prestataires (HTTP 403). Leur contenu et leur parcours de réservation/commande ne sont donc pas validés par ces contrôles locaux. Aucune transaction réelle effectuée.
+Aucune fusion dans `main`, aucun déploiement en production et aucun changement de domaine ou de DNS n’ont été effectués. Les instructions GitHub Pages et Vercel figurent dans `docs/DEPLOYMENT.md`.

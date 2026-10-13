@@ -1,161 +1,135 @@
-import { ChevronDown, Utensils } from "lucide-react";
+import { existsSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { ArrowUpRight, Download, FileText } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
-import {
-  formatPrice,
-  kidsMenu,
-  lunchMenus,
-  menuCategories,
-  platters,
-} from "@/data/menu";
+import { menuDocument } from "@/data/documents";
 import { restaurant } from "@/data/restaurant";
+import { publicAsset } from "@/lib/paths";
+
+function getMenuPdfUrl(): string | null {
+  if (!menuDocument.path) return null;
+
+  const path = menuDocument.path;
+  if (
+    !path.startsWith("/") ||
+    path.startsWith("//") ||
+    path.includes("..") ||
+    !path.endsWith(".pdf")
+  ) {
+    throw new Error(
+      "La carte doit désigner un PDF local sous public/, par exemple /carte/carte-thakyo.pdf.",
+    );
+  }
+  const file = join(process.cwd(), "public", path);
+  if (!existsSync(file) || !statSync(file).isFile()) {
+    throw new Error(
+      `Carte PDF introuvable : public${path}. Ajoutez le fichier ou remettez menuDocument.path à null.`,
+    );
+  }
+  return publicAsset(path);
+}
 
 export function RestaurantMenu() {
+  const pdfUrl = getMenuPdfUrl();
+
   return (
     <section
       id="carte"
       className="section-space border-y border-line bg-surface"
       aria-labelledby="menu-title"
     >
-      <div className="container-shell">
-        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+      <div className="container-shell grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div>
           <SectionHeading
-            eyebrow="02 — LA CARTE"
+            eyebrow="02 — NOTRE CARTE"
             title={
               <span id="menu-title">
-                À chaque envie,
+                Notre carte,
                 <br />
-                <em className="text-gold">son voyage.</em>
+                <em className="text-gold">vos envies.</em>
               </span>
             }
           />
-          <p className="max-w-sm text-sm leading-7 text-muted">
-            Sushis à Cornebarrieu, pad thaï, plats au wok et douceurs : composez
-            votre repas au fil des saveurs.
+          <p className="mt-7 max-w-lg text-sm leading-7 text-muted">
+            Sushis, makis, pad thaï et spécialités au wok : retrouvez le Japon
+            et la Thaïlande à votre table, au cœur de Cornebarrieu.
           </p>
-        </div>
-        <div className="mt-12 grid gap-5 lg:grid-cols-[1.3fr_1fr]">
-          <article className="menu-feature">
-            <div className="flex flex-wrap items-start justify-between gap-5">
-              <div>
-                <p className="eyebrow mb-3">LA PAUSE DÉJEUNER</p>
-                <h3 className="font-display text-3xl">Formule midi</h3>
-              </div>
-              <p className="font-display text-3xl text-gold">
-                {formatPrice(lunchMenus[0].price)}
-              </p>
-            </div>
-            <div className="mt-7 grid grid-cols-2 gap-6">
-              {lunchMenus.map((menu) => (
-                <div key={menu.name}>
-                  <h4 className="mb-3 font-display text-xl text-gold">
-                    {menu.name}
-                  </h4>
-                  <ul className="space-y-1 text-xs leading-6 text-muted sm:text-sm">
-                    {menu.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </article>
-          <article className="menu-feature">
-            <div className="flex flex-wrap justify-between gap-5">
-              <div>
-                <p className="eyebrow mb-3">
-                  {kidsMenu.ageLabel.toUpperCase()}
-                </p>
-                <h3 className="font-display text-3xl">Menu enfant</h3>
-              </div>
-              <p className="font-display text-3xl text-gold">
-                {formatPrice(kidsMenu.price)}
-              </p>
-            </div>
-            <ul className="mt-7 space-y-1 text-sm leading-6 text-muted">
-              {kidsMenu.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        </div>
-        <div className="mt-12">
-          <div className="mb-5 flex items-center gap-3">
-            <Utensils size={19} className="text-gold" aria-hidden="true" />
-            <h3 className="font-display text-3xl">À partager… ou pas.</h3>
-          </div>
-          <dl className="grid gap-x-12 md:grid-cols-2">
-            {platters.map((item) => (
-              <div
-                key={item.name}
-                className="flex justify-between gap-6 border-b border-line py-5"
-              >
-                <dt className="text-sm">
-                  {item.name}
-                  <span className="mt-1 block text-xs leading-6 text-muted">
-                    {item.description}
-                  </span>
-                </dt>
-                <dd className="shrink-0 text-sm text-gold tabular-nums">
-                  {formatPrice(item.price)}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="mt-14">
-          <p className="mb-5 text-xs text-muted">
-            Ouvrez une catégorie pour découvrir tous nos plats.
-          </p>
-          <div className="border-t border-line">
-            {menuCategories.map((category, index) => (
-              <details
-                key={category.id}
-                className="menu-category group border-b border-line"
-                open={index === 0}
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 sm:py-6">
-                  <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <span className="font-display text-2xl sm:text-3xl">
-                      {category.name}
-                    </span>
-                    {category.portion && (
-                      <span className="text-[11px] text-muted">
-                        {category.portion}
-                      </span>
-                    )}
-                  </span>
-                  <ChevronDown
-                    size={18}
-                    className="shrink-0 text-gold transition-transform group-open:rotate-180"
-                    aria-hidden="true"
-                  />
-                </summary>
-                <dl className="grid gap-x-12 pb-7 md:grid-cols-2">
-                  {category.items.map((item) => (
-                    <div
-                      key={item.name}
-                      className="flex justify-between gap-5 border-b border-line/60 py-3 text-sm"
-                    >
-                      <dt>{item.name}</dt>
-                      <dd className="shrink-0 text-gold tabular-nums">
-                        {formatPrice(item.price)}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </details>
-            ))}
-          </div>
-          <p className="mt-6 text-xs leading-6 text-muted">
+          <p className="mt-5 max-w-lg text-sm leading-7 text-muted">
             Une allergie ou une demande particulière ?{" "}
             <a
               href={restaurant.phoneHref}
-              className="underline underline-offset-4"
+              className="text-cream underline underline-offset-4"
             >
               Contactez notre équipe
             </a>{" "}
             avant de commander.
           </p>
+        </div>
+        <div className="relative border border-gold/35 bg-background p-7 text-center sm:p-10">
+          <FileText
+            size={34}
+            strokeWidth={1.2}
+            className="mx-auto mb-6 text-gold"
+            aria-hidden="true"
+          />
+          <p className="text-[10px] uppercase tracking-[.35em] text-gold">
+            THAKYO · CORNEBARRIEU
+          </p>
+          <h3 className="mt-5 font-display text-3xl sm:text-4xl">
+            À découvrir, à savourer.
+          </h3>
+          <p
+            id="menu-document-status"
+            className="mx-auto mt-5 max-w-sm text-sm leading-7 text-muted"
+          >
+            {pdfUrl
+              ? "Toute notre carte dans un seul document, à consulter ou à garder pour votre prochaine visite."
+              : "La carte PDF sera disponible prochainement. Notre équipe reste à votre disposition pour vous renseigner."}
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:flex-col xl:flex-row">
+            {pdfUrl ? (
+              <>
+                <a
+                  href={pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button"
+                >
+                  Consulter la carte{" "}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                  <span className="sr-only"> (PDF, nouvel onglet)</span>
+                </a>
+                <a
+                  href={pdfUrl}
+                  download={menuDocument.downloadName}
+                  className="button button-outline"
+                >
+                  Télécharger la carte <Download size={16} aria-hidden="true" />
+                  <span className="sr-only"> (PDF)</span>
+                </a>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  disabled
+                  aria-describedby="menu-document-status"
+                  className="button"
+                >
+                  Consulter la carte{" "}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  disabled
+                  aria-describedby="menu-document-status"
+                  className="button button-outline"
+                >
+                  Télécharger la carte <Download size={16} aria-hidden="true" />
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </section>

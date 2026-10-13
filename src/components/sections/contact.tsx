@@ -12,7 +12,7 @@ export function Contact() {
       <div className="container-shell grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
         <div>
           <SectionHeading
-            eyebrow="05 — NOUS RETROUVER"
+            eyebrow="06 — NOUS RETROUVER"
             title={
               <span id="contact-title">
                 À bientôt,

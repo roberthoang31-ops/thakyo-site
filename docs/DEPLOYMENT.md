@@ -1,6 +1,6 @@
-# Publier THAKYO sur Vercel
+# Publier THAKYO sur GitHub Pages ou Vercel
 
-La migration utilise Next.js, TypeScript, Tailwind CSS et l’App Router. Aucun déploiement Vercel n’a été effectué dans le cadre de cette préparation. Toute mise en production doit recevoir l’accord du propriétaire.
+Le site utilise Next.js, TypeScript, Tailwind CSS et l’App Router. Deux builds sont disponibles : un export statique pour GitHub Pages et un build Next.js natif pour Vercel. Aucun déploiement ni changement de domaine n’est effectué par ces commandes. Toute mise en production doit recevoir l’accord du propriétaire.
 
 ## 1. Vérifier la version à publier
 
@@ -10,15 +10,54 @@ Depuis la racine du dépôt `roberthoang31-ops/thakyo-site`, avec Node.js **24.x
 git switch feat/nextjs-thakyo
 npm ci
 npm run lint
+npm run typecheck
 npm run build
 npm run start
 ```
 
-Ouvrir `http://localhost:3000`, puis vérifier l’accueil, la navigation mobile, la carte, les images, les horaires, les liens d’appel et les redirections de réservation et de commande. Le serveur lancé par `npm run start` permet de contrôler la version compilée.
+Ouvrir `http://localhost:3000`, puis vérifier l’accueil, la navigation mobile, la galerie et son agrandissement, la carte PDF, les images, les horaires, les liens d’appel et les redirections de réservation et de commande. Sur téléphone, vérifier les deux boutons fixes et l’accès au pied de page. Le serveur lancé par `npm run start` permet de contrôler le build Next.js natif.
 
 Conserver les modifications sur une branche dédiée pour la revue. Le succès du build local ne confirme ni une publication ni le fonctionnement d’un futur domaine.
 
-## 2. Préparer une prévisualisation
+## 2. GitHub Pages : compiler sous `/thakyo-site/`
+
+Depuis la racine du projet, dans un shell Bash :
+
+```sh
+NEXT_PUBLIC_SITE_URL=https://roberthoang31-ops.github.io npm run build:pages
+```
+
+Le script `scripts/build-pages.mjs` active l’export statique, applique `/thakyo-site` comme `NEXT_PUBLIC_BASE_PATH` par défaut et crée `out/.nojekyll`. Les images, le futur PDF et les ressources Next.js utilisent ce préfixe. Les liens vers Google et Booqcloud restent inchangés. `NEXT_PUBLIC_SITE_URL` contient seulement l’origine HTTPS : ne pas y ajouter `/thakyo-site/`.
+
+Le dossier `out/` contient le site publiable ; les sources du dépôt ne sont pas directement exécutables par GitHub Pages. L’export utilise les images publiques sans serveur d’optimisation Next.js. Ne pas utiliser `npm run start` pour servir cet export.
+
+Pour vérifier localement le vrai sous-chemin, un serveur statique doit servir le contenu de `out/` à l’adresse `/thakyo-site/`. Exemple sous Linux/macOS avec Python 3, depuis la racine du projet :
+
+```sh
+preview_dir=$(mktemp -d)
+mkdir "$preview_dir/thakyo-site"
+cp -R out/. "$preview_dir/thakyo-site/"
+python3 -m http.server 4173 --directory "$preview_dir"
+```
+
+Ouvrir `http://localhost:4173/thakyo-site/`. Contrôler les images, la galerie, les ancres, le futur PDF, `/thakyo-site/robots.txt` et `/thakyo-site/sitemap.xml`. Un build à la racine ne suffit pas à vérifier ces chemins.
+
+**Après accord de publication**, dans **Settings → Pages**, configurer une publication de l’artefact `out/` via GitHub Actions, ou placer son contenu sur la branche de publication dédiée et sélectionner cette branche. Conserver `.nojekyll`, les fichiers cachés et le dossier `_next`. Aucun workflow de déploiement automatique n’est ajouté par cette préparation. Vérifier le succès du déploiement Pages avant d’annoncer que le site est en ligne.
+
+L’adresse attendue pour ce dépôt, sans domaine personnalisé, est `https://roberthoang31-ops.github.io/thakyo-site/`. Elle n’est pas une preuve que cette version est publiée.
+
+### Domaine personnalisé sur GitHub Pages
+
+Un domaine personnalisé permet de conserver le compte GitHub tout en affichant le nom du restaurant dans le navigateur. Sa disponibilité et son achat restent à confirmer. Si le domaine choisi héberge le site à sa racine :
+
+1. Définir `NEXT_PUBLIC_SITE_URL` avec l’origine HTTPS réelle du domaine.
+2. Recompiler avec `NEXT_PUBLIC_BASE_PATH='' npm run build:pages` pour retirer `/thakyo-site/` de tous les chemins.
+3. Après accord, configurer **Settings → Pages → Custom domain** et les DNS indiqués par GitHub chez le fournisseur du domaine. Préserver les enregistrements de messagerie existants.
+4. Publier le nouvel export et activer **Enforce HTTPS** dès que GitHub le permet. La validation DNS et le certificat peuvent demander un délai.
+
+Un simple changement de DNS ne corrige pas les chemins d’un ancien build : recompiler avec le bon préfixe est nécessaire. Voir [les domaines personnalisés GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages) et [leur configuration](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+
+## 3. Vercel : préparer une prévisualisation
 
 Une prévisualisation Vercel permet de valider le résultat sur ordinateur et téléphone avant de publier. L’import d’un dépôt depuis le tableau de bord Vercel peut déclencher une première production au clic sur **Deploy** : attendre l’accord du propriétaire avant cette action.
 
@@ -34,7 +73,7 @@ Pendant la liaison, sélectionner le bon compte Vercel et créer ou choisir le p
 
 La prévisualisation possède sa propre URL : la communiquer au propriétaire pour validation. Vérifier le comportement des éventuelles protections d’accès Vercel avant de la partager.
 
-## 3. Configuration du projet
+## 4. Configuration Vercel
 
 Dans Vercel, importer ou connecter le dépôt **`roberthoang31-ops/thakyo-site`** avec les réglages suivants :
 
@@ -50,9 +89,11 @@ Dans Vercel, importer ou connecter le dépôt **`roberthoang31-ops/thakyo-site`*
 
 Ne pas sélectionner `public` comme dossier racine ou sortie. Il n’y a pas d’export statique à configurer pour Vercel.
 
+Laisser `GITHUB_PAGES` absent et `NEXT_PUBLIC_BASE_PATH` absent ou vide pour un site Vercel à la racine. Utiliser `npm run build`, et non `npm run build:pages` : l’optimisation des images Next.js reste alors active.
+
 Après connexion Git, les branches dédiées servent aux déploiements Preview ; une fusion ou un push sur la branche de production `main` peut déclencher automatiquement une publication. Obtenir l’accord avant de fusionner, pousser sur `main`, cliquer sur **Deploy** pour une production ou promouvoir une preview.
 
-## 4. URL publique et référencement local
+## 5. URL publique et référencement local
 
 Ajouter dans **Project Settings → Environment Variables** :
 
@@ -60,7 +101,7 @@ Ajouter dans **Project Settings → Environment Variables** :
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | `NEXT_PUBLIC_SITE_URL` | L’URL HTTPS publique finale, par exemple l’adresse Vercel attribuée au projet ou le domaine choisi par le propriétaire | URL canonique et sitemap |
 
-Cette variable est facultative pour développer et compiler localement ; elle doit être définie avant la publication. Utiliser l’adresse réelle du site, sans chemin supplémentaire ni paramètre. Aucun nom de domaine personnalisé n’est présumé.
+Cette variable est facultative pour développer et compiler localement ; elle doit être définie avant la publication. Utiliser l’origine HTTPS réelle du site, sans chemin supplémentaire ni paramètre. Le préfixe `NEXT_PUBLIC_BASE_PATH` est ajouté automatiquement par le code aux URL publiques. Aucun nom de domaine personnalisé n’est présumé.
 
 L’URL canonique et le sitemap sont ajoutés pour la production lorsque cette adresse est configurée. Les déploiements Preview Vercel et les versions sans URL publique configurée sont exclus de l’indexation ; leur sitemap reste vide. Ces consignes d’indexation ne remplacent pas une protection d’accès.
 
@@ -75,18 +116,18 @@ Vérifier après publication :
 
 Une fois l’adresse définitive disponible, le propriétaire peut vérifier son domaine dans Google Search Console et soumettre le sitemap. L’indexation dépend des moteurs de recherche.
 
-## 5. Informations à valider avant production
+## 6. Contenus et informations à valider avant production
 
 - **Coordonnées** : 4 chemin de la Plane, 31700 Cornebarrieu ; 09 83 50 23 26.
 - **Horaires** : lundi fermé ; mardi à samedi, 12 h–14 h et 19 h–22 h ; dimanche, 19 h–22 h.
-- **Carte et tarifs** : faire confirmer les informations transcrites de la carte fournie, notamment les disponibilités et prix actuels.
+- **Carte PDF** : aucun PDF n’est actuellement présent. Ajouter le fichier réel dans `public/carte/`, puis renseigner `menuDocument.path` dans `src/data/documents.ts`, par exemple `/carte/carte-thakyo.pdf`. Ne pas inclure `public/` ni `/thakyo-site/`. `downloadName` définit le nom du téléchargement. Les deux boutons restent désactivés tant que le chemin vaut `null` ; un fichier configuré mais absent fait échouer le build. Vérifier ensuite l’ouverture et le téléchargement depuis le site compilé. Les données de `src/data/menu.ts` sont conservées comme référence et ne sont plus affichées.
 - **Réservation et vente à emporter** : les boutons redirigent vers [la réservation Google](https://www.google.com/maps/reserve/v/dine/c/q8CeveU3FLM?hl=fr) et [la commande Booqcloud](https://france.booqcloud.com/webshop/Order2POSThakyo/), aux adresses fournies par le restaurant. Le téléphone reste disponible. Vérifier que chaque service affiche bien THAKYO et propose le parcours attendu avant publication ; aucune réservation ni commande réelle n'a été effectuée pendant cette préparation.
 - **Mentions légales** : compléter l’identité juridique de l’éditeur, ses coordonnées légales, l’immatriculation, le responsable de publication et les coordonnées de l’hébergeur. Ajouter les informations applicables à l’entreprise, dont TVA et médiation de la consommation, si nécessaires.
-- **Photos et logo** : faire valider le rendu et l’autorisation de publication des visuels fournis.
+- **Photos et logo** : les fichiers se trouvent dans `public/images/`. La galerie est configurée dans `src/data/gallery.ts` avec les chemins, descriptions, légendes et dimensions. Seules les vraies photos du décor sont disponibles ; ajouter les photos de plats lorsqu’elles seront fournies. Faire valider le rendu et l’autorisation de publication des visuels.
 
 Le site vitrine actuel n’a pas de backend, de base de données ni de service de paiement à configurer. La réservation et la commande sont prises en charge sur les sites externes ; aucune API de prestataire n’est intégrée. Les liens sont centralisés dans `src/data/restaurant.ts` et ne nécessitent aucun secret applicatif. Les éventuels futurs identifiants de prestataires doivent être enregistrés dans les variables privées Vercel, jamais dans Git ou dans une variable `NEXT_PUBLIC_`.
 
-## 6. Publication après accord
+## 7. Publication Vercel après accord
 
 Après validation de la preview et accord explicite, connecter le dépôt si nécessaire, publier la version approuvée depuis `main` et vérifier l’URL de production retournée par Vercel. Contrôler les journaux de compilation, le certificat HTTPS, les liens, les photos et l’affichage mobile.
 

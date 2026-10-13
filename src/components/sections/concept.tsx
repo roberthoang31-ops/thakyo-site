@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, Leaf, Sun } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { publicAsset } from "@/lib/paths";
 
 export function Concept() {
   return (
@@ -13,7 +14,7 @@ export function Concept() {
         <div className="relative">
           <div className="relative aspect-[4/4.4] overflow-hidden">
             <Image
-              src="/images/restaurant-portrait.png"
+              src={publicAsset("/images/restaurant-portrait.png")}
               alt="Le décor actuel du restaurant THAKYO : cerisier fleuri, lanternes et boiseries"
               fill
               sizes="(max-width: 1023px) 90vw, 42vw"

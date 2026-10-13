@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUp } from "lucide-react";
 import { restaurant } from "@/data/restaurant";
+import { publicAsset } from "@/lib/paths";
 
 export function SiteFooter() {
   return (
@@ -8,7 +9,7 @@ export function SiteFooter() {
       <div className="flex flex-col items-start justify-between gap-8 border-b border-line pb-9 sm:flex-row sm:items-center">
         <a href="#accueil" aria-label="THAKYO, retour à l’accueil">
           <Image
-            src="/images/logo-thakyo.png"
+            src={publicAsset("/images/logo-thakyo.png")}
             alt="THAKYO"
             width={80}
             height={80}

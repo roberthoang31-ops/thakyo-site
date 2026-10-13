@@ -5,6 +5,8 @@ import { Concept } from "@/components/sections/concept";
 import { RestaurantMenu } from "@/components/sections/menu";
 import { RestaurantServices } from "@/components/sections/services";
 import { Contact } from "@/components/sections/contact";
+import { Gallery } from "@/components/sections/gallery";
+import { MobileActions } from "@/components/layout/mobile-actions";
 import { restaurantJsonLd } from "@/lib/seo";
 
 export default function HomePage() {
@@ -18,10 +20,12 @@ export default function HomePage() {
         <Hero />
         <Concept />
         <RestaurantMenu />
+        <Gallery />
         <RestaurantServices />
         <Contact />
       </main>
       <SiteFooter />
+      <MobileActions />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { restaurant } from "@/data/restaurant";
+import { publicAsset } from "@/lib/paths";
 
 function readSiteOrigin(): string | undefined {
   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -39,6 +40,9 @@ function readSiteOrigin(): string | undefined {
 }
 
 export const siteOrigin = readSiteOrigin();
+export const siteUrl = siteOrigin
+  ? `${siteOrigin}${publicAsset("/")}`
+  : undefined;
 export const canIndexSite = Boolean(
   siteOrigin &&
   process.env.VERCEL_ENV !== "preview" &&
@@ -50,7 +54,7 @@ const description =
   "THAKYO, restaurant japonais et thaï à Cornebarrieu : sushis, makis et spécialités thaïes dans un cadre chaleureux. Sur place ou à emporter, 4 chemin de la Plane.";
 const socialImage = siteOrigin
   ? {
-      url: `${siteOrigin}/images/restaurant-bar.png`,
+      url: `${siteOrigin}${publicAsset("/images/restaurant-bar.png")}`,
       alt: "Le bar du restaurant THAKYO à Cornebarrieu, entre bois, lumière dorée et fleurs de cerisier",
     }
   : undefined;
@@ -61,9 +65,7 @@ export const siteMetadata: Metadata = {
   applicationName: restaurant.name,
   category: "restaurant",
   ...(siteOrigin ? { metadataBase: new URL(siteOrigin) } : {}),
-  ...(canIndexSite && siteOrigin
-    ? { alternates: { canonical: `${siteOrigin}/` } }
-    : {}),
+  ...(canIndexSite && siteUrl ? { alternates: { canonical: siteUrl } } : {}),
   robots: {
     index: canIndexSite,
     follow: canIndexSite,
@@ -73,14 +75,17 @@ export const siteMetadata: Metadata = {
       "max-image-preview": "large",
     },
   },
-  icons: { icon: "/images/logo-thakyo.png", apple: "/images/logo-thakyo.png" },
+  icons: {
+    icon: publicAsset("/images/logo-thakyo.png"),
+    apple: publicAsset("/images/logo-thakyo.png"),
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",
     title,
     description,
     siteName: restaurant.name,
-    ...(siteOrigin ? { url: `${siteOrigin}/` } : {}),
+    ...(siteUrl ? { url: siteUrl } : {}),
     ...(socialImage ? { images: [socialImage] } : {}),
   },
   twitter: {
@@ -130,11 +135,11 @@ export const restaurantJsonLd = {
   ],
   ...(siteOrigin
     ? {
-        "@id": `${siteOrigin}/#restaurant`,
-        url: `${siteOrigin}/`,
-        image: `${siteOrigin}/images/restaurant-bar.png`,
-        logo: `${siteOrigin}/images/logo-thakyo.png`,
-        hasMenu: `${siteOrigin}/#carte`,
+        "@id": `${siteUrl}#restaurant`,
+        url: siteUrl,
+        image: `${siteOrigin}${publicAsset("/images/restaurant-bar.png")}`,
+        logo: `${siteOrigin}${publicAsset("/images/logo-thakyo.png")}`,
+        hasMenu: `${siteUrl}#carte`,
       }
     : {}),
 };

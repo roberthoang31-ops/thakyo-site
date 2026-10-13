@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, CalendarDays, Phone, ShoppingBag } from "lucide-react";
 import { restaurant } from "@/data/restaurant";
+import { publicAsset } from "@/lib/paths";
 
 export function RestaurantServices() {
   return (
@@ -11,7 +12,7 @@ export function RestaurantServices() {
         className="relative isolate overflow-hidden border border-line p-8 sm:p-12"
       >
         <Image
-          src="/images/restaurant-detail.png"
+          src={publicAsset("/images/restaurant-detail.png")}
           alt=""
           fill
           sizes="(max-width: 1023px) 90vw, 45vw"
@@ -24,7 +25,7 @@ export function RestaurantServices() {
           strokeWidth={1.3}
           aria-hidden="true"
         />
-        <p className="eyebrow">03 — RÉSERVATION</p>
+        <p className="eyebrow">04 — RÉSERVATION</p>
         <h2
           id="reservation-title"
           className="font-display text-4xl leading-tight sm:text-5xl"
@@ -63,7 +64,7 @@ export function RestaurantServices() {
           strokeWidth={1.3}
           aria-hidden="true"
         />
-        <p className="eyebrow">04 — À EMPORTER</p>
+        <p className="eyebrow">05 — À EMPORTER</p>
         <h2
           id="takeaway-title"
           className="font-display text-4xl leading-tight sm:text-5xl"

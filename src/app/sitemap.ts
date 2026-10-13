@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
 
-import { canIndexSite, siteOrigin } from "@/lib/seo";
+import { canIndexSite, siteUrl } from "@/lib/seo";
+
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  if (!canIndexSite || !siteOrigin) return [];
+  if (!canIndexSite || !siteUrl) return [];
 
-  return [{ url: `${siteOrigin}/` }];
+  return [{ url: siteUrl }];
 }

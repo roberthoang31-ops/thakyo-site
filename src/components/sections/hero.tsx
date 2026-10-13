@@ -1,6 +1,7 @@
 import { getImageProps } from "next/image";
 import { ArrowDown, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
 import { restaurant } from "@/data/restaurant";
+import { publicAsset } from "@/lib/paths";
 
 export function Hero() {
   const common = {
@@ -10,13 +11,13 @@ export function Hero() {
   };
   const { props: desktop } = getImageProps({
     ...common,
-    src: "/images/restaurant-bar.png",
+    src: publicAsset("/images/restaurant-bar.png"),
     width: 1448,
     height: 1086,
   });
   const { props: mobile } = getImageProps({
     ...common,
-    src: "/images/restaurant-portrait.png",
+    src: publicAsset("/images/restaurant-portrait.png"),
     width: 1086,
     height: 1448,
   });
@@ -29,7 +30,7 @@ export function Hero() {
       <picture className="absolute inset-0 -z-20">
         <source
           media="(max-width: 767px)"
-          srcSet={mobile.srcSet}
+          srcSet={mobile.srcSet ?? mobile.src}
           sizes="100vw"
         />
         {/* getImageProps generates the optimized responsive sources for this picture. */}
@@ -60,8 +61,14 @@ export function Hero() {
           Bienvenue chez THAKYO, votre restaurant à Cornebarrieu.
         </p>
         <div className="mt-9 flex flex-wrap gap-3">
-          <a href="#carte" className="button">
-            Découvrir la carte <ArrowUpRight size={17} aria-hidden="true" />
+          <a
+            href={restaurant.orderUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button"
+          >
+            Commander en ligne <ArrowUpRight size={17} aria-hidden="true" />
+            <span className="sr-only"> sur Booqcloud (nouvel onglet)</span>
           </a>
           <a
             href={restaurant.reservationUrl}
@@ -73,6 +80,9 @@ export function Hero() {
             <span className="sr-only"> sur Google (nouvel onglet)</span>
           </a>
         </div>
+        <a href="#carte" className="text-link mt-4 text-cream/90">
+          Découvrir notre carte <ArrowDown size={15} aria-hidden="true" />
+        </a>
       </div>
       <div className="absolute inset-x-0 bottom-0">
         <div className="container-shell flex flex-wrap items-center justify-between gap-5 border-t border-cream/20 py-6 text-[10px] tracking-wide text-cream/85 sm:text-xs">

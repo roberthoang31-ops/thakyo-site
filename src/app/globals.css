@@ -63,6 +63,12 @@
   .button-outline {
     @apply bg-transparent text-gold hover:bg-gold hover:text-background;
   }
+  .button:disabled {
+    cursor: not-allowed;
+    background: transparent;
+    color: var(--color-muted);
+    border-color: var(--color-line);
+  }
   .text-link {
     @apply inline-flex min-h-11 items-center gap-5 border-b border-gold py-2 text-sm transition-colors hover:text-gold;
   }
@@ -106,6 +112,15 @@
   }
   .skip-link:focus {
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  }
+  html {
+    scroll-padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px));
   }
 }
 
