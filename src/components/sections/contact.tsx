@@ -1,8 +1,10 @@
-import { ArrowUpRight, Clock3, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock3, Mail, MapPin, Phone } from "lucide-react";
 import { restaurant } from "@/data/restaurant";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { contactEmailHref } from "@/lib/contact";
 
 export function Contact() {
+  const emailHref = contactEmailHref("Contact — Thakyo");
   return (
     <section
       id="contact"
@@ -12,7 +14,7 @@ export function Contact() {
       <div className="container-shell grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
         <div>
           <SectionHeading
-            eyebrow="06 — NOUS RETROUVER"
+            eyebrow="08 — NOUS RETROUVER"
             title={
               <span id="contact-title">
                 À bientôt,
@@ -56,6 +58,24 @@ export function Contact() {
               </a>
             </div>
           </div>
+          {emailHref && (
+            <div className="contact-row">
+              <Mail
+                size={20}
+                className="mt-1 shrink-0 text-gold"
+                aria-hidden="true"
+              />
+              <div className="min-w-0">
+                <h3 className="eyebrow mb-1">L’E-MAIL</h3>
+                <a
+                  href={emailHref}
+                  className="inline-flex min-h-11 items-center break-all text-sm hover:text-gold"
+                >
+                  {restaurant.email}
+                </a>
+              </div>
+            </div>
+          )}
           <div className="contact-row border-b-0">
             <Clock3 size={20} className="mt-1 text-gold" aria-hidden="true" />
             <div className="min-w-0 flex-1">

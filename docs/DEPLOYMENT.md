@@ -15,7 +15,7 @@ npm run build
 npm run start
 ```
 
-Ouvrir `http://localhost:3000`, puis vérifier l’accueil, la navigation mobile, la galerie et son agrandissement, la carte PDF, les images, les horaires, les liens d’appel et les redirections de réservation et de commande. Sur téléphone, vérifier les deux boutons fixes et l’accès au pied de page. Le serveur lancé par `npm run start` permet de contrôler le build Next.js natif.
+Ouvrir `http://localhost:3000`, puis vérifier les six liens de navigation, le menu mobile, les filtres de la galerie, son agrandissement et sa fermeture au clavier, l’ouverture et le téléchargement de la carte PDF, les images, les horaires, les liens d’appel et les redirections de réservation et de commande. Vérifier les sections privatisation et entreprises ; leurs liens e-mail apparaissent uniquement lorsqu’une adresse confirmée est renseignée. Sur téléphone, vérifier les deux boutons fixes et l’accès au pied de page. Le serveur lancé par `npm run start` permet de contrôler le build Next.js natif.
 
 Conserver les modifications sur une branche dédiée pour la revue. Le succès du build local ne confirme ni une publication ni le fonctionnement d’un futur domaine.
 
@@ -27,7 +27,7 @@ Depuis la racine du projet, dans un shell Bash :
 NEXT_PUBLIC_SITE_URL=https://roberthoang31-ops.github.io npm run build:pages
 ```
 
-Le script `scripts/build-pages.mjs` active l’export statique, applique `/thakyo-site` comme `NEXT_PUBLIC_BASE_PATH` par défaut et crée `out/.nojekyll`. Les images, le futur PDF et les ressources Next.js utilisent ce préfixe. Les liens vers Google et Booqcloud restent inchangés. `NEXT_PUBLIC_SITE_URL` contient seulement l’origine HTTPS : ne pas y ajouter `/thakyo-site/`.
+Le script `scripts/build-pages.mjs` active l’export statique, applique `/thakyo-site` comme `NEXT_PUBLIC_BASE_PATH` par défaut et crée `out/.nojekyll`. Les images, le PDF et les ressources Next.js utilisent ce préfixe. Le fichier `public/assets/menus/menu-thakyo.pdf` est ainsi accessible sous `/thakyo-site/assets/menus/menu-thakyo.pdf`. Les liens vers Google et Booqcloud restent inchangés. `NEXT_PUBLIC_SITE_URL` contient seulement l’origine HTTPS : ne pas y ajouter `/thakyo-site/`.
 
 Le dossier `out/` contient le site publiable ; les sources du dépôt ne sont pas directement exécutables par GitHub Pages. L’export utilise les images publiques sans serveur d’optimisation Next.js. Ne pas utiliser `npm run start` pour servir cet export.
 
@@ -40,7 +40,7 @@ cp -R out/. "$preview_dir/thakyo-site/"
 python3 -m http.server 4173 --directory "$preview_dir"
 ```
 
-Ouvrir `http://localhost:4173/thakyo-site/`. Contrôler les images, la galerie, les ancres, le futur PDF, `/thakyo-site/robots.txt` et `/thakyo-site/sitemap.xml`. Un build à la racine ne suffit pas à vérifier ces chemins.
+Ouvrir `http://localhost:4173/thakyo-site/`. Contrôler les images, la galerie, les ancres, l’ouverture du PDF dans un nouvel onglet et son téléchargement, `/thakyo-site/robots.txt` et `/thakyo-site/sitemap.xml`. Un build à la racine ne suffit pas à vérifier ces chemins.
 
 **Après accord de publication**, dans **Settings → Pages**, configurer une publication de l’artefact `out/` via GitHub Actions, ou placer son contenu sur la branche de publication dédiée et sélectionner cette branche. Conserver `.nojekyll`, les fichiers cachés et le dossier `_next`. Aucun workflow de déploiement automatique n’est ajouté par cette préparation. Vérifier le succès du déploiement Pages avant d’annoncer que le site est en ligne.
 
@@ -118,12 +118,13 @@ Une fois l’adresse définitive disponible, le propriétaire peut vérifier son
 
 ## 6. Contenus et informations à valider avant production
 
-- **Coordonnées** : 4 chemin de la Plane, 31700 Cornebarrieu ; 09 83 50 23 26.
+- **Coordonnées** : 4 chemin de la Plane, 31700 Cornebarrieu ; 09 83 50 23 26. L’e-mail n’est pas encore confirmé : renseigner `restaurant.email` dans `src/data/restaurant.ts` pour afficher les liens de contact des sections privatisation et entreprises. Tant que sa valeur est `null`, seuls les liens d’appel sont proposés ; aucun bouton e-mail inactif n’est affiché.
 - **Horaires** : lundi fermé ; mardi à samedi, 12 h–14 h et 19 h–22 h ; dimanche, 19 h–22 h.
-- **Carte PDF** : aucun PDF n’est actuellement présent. Ajouter le fichier réel dans `public/carte/`, puis renseigner `menuDocument.path` dans `src/data/documents.ts`, par exemple `/carte/carte-thakyo.pdf`. Ne pas inclure `public/` ni `/thakyo-site/`. `downloadName` définit le nom du téléchargement. Les deux boutons restent désactivés tant que le chemin vaut `null` ; un fichier configuré mais absent fait échouer le build. Vérifier ensuite l’ouverture et le téléchargement depuis le site compilé. Les données de `src/data/menu.ts` sont conservées comme référence et ne sont plus affichées.
+- **Carte PDF** : le document fourni `Menu_Thakyo_Impression.pdf` est intégré sans modification dans `public/assets/menus/menu-thakyo.pdf`. Pour une mise à jour, remplacer simplement ce fichier, puis recompiler. `src/data/documents.ts` centralise le chemin `/assets/menus/menu-thakyo.pdf` et le nom de téléchargement `Menu_Thakyo_Impression.pdf`. Ne pas inclure `public/` ni `/thakyo-site/` dans ce chemin. Un fichier configuré mais absent fait échouer le build ; un chemin `null` masque les liens PDF. Vérifier l’ouverture et le téléchargement depuis le site compilé. Les données de `src/data/menu.ts` sont conservées comme référence et ne sont plus affichées.
 - **Réservation et vente à emporter** : les boutons redirigent vers [la réservation Google](https://www.google.com/maps/reserve/v/dine/c/q8CeveU3FLM?hl=fr) et [la commande Booqcloud](https://france.booqcloud.com/webshop/Order2POSThakyo/), aux adresses fournies par le restaurant. Le téléphone reste disponible. Vérifier que chaque service affiche bien THAKYO et propose le parcours attendu avant publication ; aucune réservation ni commande réelle n'a été effectuée pendant cette préparation.
 - **Mentions légales** : compléter l’identité juridique de l’éditeur, ses coordonnées légales, l’immatriculation, le responsable de publication et les coordonnées de l’hébergeur. Ajouter les informations applicables à l’entreprise, dont TVA et médiation de la consommation, si nécessaires.
-- **Photos et logo** : les fichiers se trouvent dans `public/images/`. La galerie est configurée dans `src/data/gallery.ts` avec les chemins, descriptions, légendes et dimensions. Seules les vraies photos du décor sont disponibles ; ajouter les photos de plats lorsqu’elles seront fournies. Faire valider le rendu et l’autorisation de publication des visuels.
+- **Photos et logo** : les photos du décor et le logo se trouvent dans `public/images/`. Deux photographies de plats extraites du PDF fourni sont dans `public/assets/galerie/`, également prévu pour les futures photos. La liste modifiable est `src/data/galerie.json` avec chemin, légende, texte alternatif, catégorie et dimensions. `src/data/gallery.ts` vérifie cette liste. Consulter le [guide de contenu](GUIDE-CONTENU.md) pour ajouter un visuel ; valider le rendu et l’autorisation de publication des photos.
+- **Privatisation et entreprises** : les textes invitent à discuter du projet avec le restaurant. Ils ne promettent ni capacité, ni tarif, ni food truck, ni livraison régulière. Après ajout de l’e-mail confirmé, vérifier les adresses `mailto:` et leurs objets « Demande de privatisation — Thakyo » et « Demande entreprise — Thakyo » sans envoyer de message de test.
 
 Le site vitrine actuel n’a pas de backend, de base de données ni de service de paiement à configurer. La réservation et la commande sont prises en charge sur les sites externes ; aucune API de prestataire n’est intégrée. Les liens sont centralisés dans `src/data/restaurant.ts` et ne nécessitent aucun secret applicatif. Les éventuels futurs identifiants de prestataires doivent être enregistrés dans les variables privées Vercel, jamais dans Git ou dans une variable `NEXT_PUBLIC_`.
 

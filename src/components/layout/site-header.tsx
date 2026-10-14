@@ -8,10 +8,10 @@ import { publicAsset } from "@/lib/paths";
 
 const links = [
   ["Accueil", "#accueil"],
-  ["Notre concept", "#concept"],
-  ["Carte PDF", "#carte"],
+  ["La carte", "#carte"],
   ["Galerie", "#galerie"],
-  ["À emporter", "#emporter"],
+  ["Privatisation", "#privatisation"],
+  ["Entreprises", "#entreprises"],
   ["Contact", "#contact"],
 ] as const;
 

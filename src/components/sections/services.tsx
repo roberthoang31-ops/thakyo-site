@@ -25,7 +25,7 @@ export function RestaurantServices() {
           strokeWidth={1.3}
           aria-hidden="true"
         />
-        <p className="eyebrow">04 — RÉSERVATION</p>
+        <p className="eyebrow">06 — RÉSERVATION</p>
         <h2
           id="reservation-title"
           className="font-display text-4xl leading-tight sm:text-5xl"
@@ -64,7 +64,7 @@ export function RestaurantServices() {
           strokeWidth={1.3}
           aria-hidden="true"
         />
-        <p className="eyebrow">05 — À EMPORTER</p>
+        <p className="eyebrow">07 — À EMPORTER</p>
         <h2
           id="takeaway-title"
           className="font-display text-4xl leading-tight sm:text-5xl"

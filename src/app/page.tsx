@@ -7,6 +7,8 @@ import { RestaurantServices } from "@/components/sections/services";
 import { Contact } from "@/components/sections/contact";
 import { Gallery } from "@/components/sections/gallery";
 import { MobileActions } from "@/components/layout/mobile-actions";
+import { PrivateEvents } from "@/components/sections/private-events";
+import { Corporate } from "@/components/sections/corporate";
 import { restaurantJsonLd } from "@/lib/seo";
 
 export default function HomePage() {
@@ -21,6 +23,8 @@ export default function HomePage() {
         <Concept />
         <RestaurantMenu />
         <Gallery />
+        <PrivateEvents />
+        <Corporate />
         <RestaurantServices />
         <Contact />
       </main>

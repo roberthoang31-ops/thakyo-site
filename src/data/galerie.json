@@ -1,0 +1,51 @@
+[
+  {
+    "src": "/images/restaurant-bar.png",
+    "alt": "Comptoir en bois éclairé de lumière ambrée sous les branches d’un cerisier rose",
+    "caption": "Sous les cerisiers",
+    "category": "restaurant",
+    "width": 1448,
+    "height": 1086
+  },
+  {
+    "src": "/images/restaurant-portrait.png",
+    "alt": "Tables et fauteuils près du comptoir THAKYO, avec lanternes japonaises et cerisier fleuri",
+    "caption": "Une table, une parenthèse",
+    "category": "restaurant",
+    "width": 1086,
+    "height": 1448,
+    "objectPosition": "center 40%"
+  },
+  {
+    "src": "/images/restaurant-salle.png",
+    "alt": "Trois vues de la salle THAKYO : tables dressées, cuisine ouverte et mur végétal",
+    "caption": "L’atmosphère de la salle",
+    "category": "restaurant",
+    "width": 1448,
+    "height": 1086
+  },
+  {
+    "src": "/images/restaurant-detail.png",
+    "alt": "Détail du bar avec bouteilles de saké, bonsaï et enseigne lumineuse THAKYO",
+    "caption": "L’attention aux détails",
+    "category": "restaurant",
+    "width": 1448,
+    "height": 1086
+  },
+  {
+    "src": "/assets/galerie/soupe-thaie.jpg",
+    "alt": "Bol de soupe thaïe aux crevettes, champignons et herbes, photographié dans la carte fournie par Thakyo",
+    "caption": "Soupe thaïe — visuel de notre carte",
+    "category": "plats",
+    "width": 1200,
+    "height": 960
+  },
+  {
+    "src": "/assets/galerie/pad-thai.jpg",
+    "alt": "Assiette de nouilles pad thaï, poulet, pousses et cacahuètes, photographiée dans la carte fournie par Thakyo",
+    "caption": "Pad thaï — visuel de notre carte",
+    "category": "plats",
+    "width": 1536,
+    "height": 2048
+  }
+]

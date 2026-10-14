@@ -1,9 +1,10 @@
 /**
- * Add the restaurant's actual PDF to public/carte/, then set path below to
- * "/carte/carte-thakyo.pdf". Do not include public/ or /thakyo-site/ here.
- * null keeps both PDF controls disabled while the document is unavailable.
+ * Déposer Menu_Thakyo_Impression.pdf sous public/assets/menus/menu-thakyo.pdf,
+ * puis définir path à "/assets/menus/menu-thakyo.pdf".
+ * Ne pas inclure public/ ou /thakyo-site/ dans ce chemin.
+ * null masque les liens PDF tant que le vrai document n’est pas disponible.
  */
 export const menuDocument: { path: string | null; downloadName: string } = {
-  path: null,
-  downloadName: "carte-thakyo.pdf",
+  path: "/assets/menus/menu-thakyo.pdf",
+  downloadName: "Menu_Thakyo_Impression.pdf",
 };

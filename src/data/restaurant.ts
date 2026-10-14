@@ -13,6 +13,8 @@ export const restaurant = {
   phone: "09 83 50 23 26",
   phoneInternational: "+33983502326",
   phoneHref: "tel:+33983502326",
+  // Renseigner uniquement l’adresse confirmée par le restaurant.
+  email: null as string | null,
   reservationUrl:
     "https://www.google.com/maps/reserve/v/dine/c/q8CeveU3FLM?hl=fr",
   orderUrl: "https://france.booqcloud.com/webshop/Order2POSThakyo/",
