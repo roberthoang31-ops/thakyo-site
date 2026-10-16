@@ -78,12 +78,12 @@ Ouvrir `src/data/restaurant.ts`. Ce fichier centralise les coordonnées confirm�
 
 En cas de changement de numéro, mettre à jour les trois valeurs de téléphone ensemble. Le numéro actuel est `09 83 50 23 26`, sa forme internationale `+33983502326` et le lien d’appel `tel:+33983502326`. Si les horaires changent, mettre à jour aussi les horaires structurés du référencement dans `src/lib/seo.ts`.
 
-L’adresse e-mail n’a pas encore été confirmée : sa valeur reste `null`. Une fois l’adresse réelle connue, remplacer uniquement `null` par l’adresse entre guillemets, en conservant le type `as string | null`. Les boutons « Parler de mon événement » et « Contacter Thakyo » apparaissent alors automatiquement. Le code de `src/lib/contact.ts` vérifie le format et prépare les objets :
+L’adresse e-mail confirmée est `thakyocornebarrieu@gmail.com`, renseignée dans `restaurant.email`. Pour la changer, remplacer l’adresse entre guillemets dans `src/data/restaurant.ts`, en conservant le type `as string | null`. Les boutons « Parler de mon événement » et « Contacter Thakyo » utilisent automatiquement cette configuration. Le code de `src/lib/contact.ts` vérifie le format et prépare les objets :
 
 - « Demande de privatisation — Thakyo » ;
 - « Demande entreprise — Thakyo ».
 
-Tant que l’adresse manque, les sections proposent « Nous appeler », sans bouton e-mail inactif ni adresse inventée. Un lien `mailto:` ouvre l’application de messagerie du visiteur ; le site n’envoie aucun e-mail lui-même.
+Les liens `mailto:` ouvrent l’application de messagerie du visiteur avec le destinataire `thakyocornebarrieu@gmail.com` et l’objet correspondant ; le site n’envoie aucun e-mail lui-même. Si l’adresse doit être retirée temporairement, mettre `email: null as string | null` masque les boutons e-mail et conserve les liens « Nous appeler ».
 
 Conserver les URL de réservation Google et de commande Booqcloud déjà confirmées, sauf si le restaurant fournit de nouvelles adresses.
 

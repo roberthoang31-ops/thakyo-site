@@ -60,7 +60,7 @@ La carte originale `Menu_Thakyo_Impression.pdf` est conservée sans modification
 
 La galerie présente quatre photographies du décor actuel et deux photographies de plats extraites du PDF fourni, sans modification des fichiers photographiques extraits. Aucun visuel de plat fictif n’est ajouté. La liste est centralisée dans `src/data/galerie.json` ; `src/data/gallery.ts` vérifie son format.
 
-**L’adresse e-mail reste à confirmer.** `restaurant.email` vaut actuellement `null` : les appels sont disponibles et aucun bouton e-mail inactif n’est affiché. Après renseignement de l’adresse confirmée, les liens pour la privatisation et les entreprises apparaissent avec leurs objets respectifs.
+L’adresse e-mail confirmée `thakyocornebarrieu@gmail.com` est renseignée dans `restaurant.email`. Les boutons « Parler de mon événement » et « Contacter Thakyo » ouvrent l’application de messagerie du visiteur avec cette adresse et les objets « Demande de privatisation — Thakyo » et « Demande entreprise — Thakyo ». Le site n’envoie aucun message lui-même.
 
 Après une modification, relancer les contrôles et le build. Les images sont optimisées par Next.js sur Vercel ; l’export GitHub Pages utilise directement les fichiers publics, à préparer à une taille et un poids adaptés. Les polices système évitent tout téléchargement de polices lors du build.
 

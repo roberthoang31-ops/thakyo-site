@@ -9,7 +9,15 @@ La page conserve le logo, le décor actuel, l’identité sombre et dorée, le c
 - les sections Privatisation et Entreprises, reprenant les textes demandés ;
 - la navigation Accueil, La carte, Galerie, Privatisation, Entreprises et Contact.
 
-L’adresse e-mail n’est pas encore confirmée. `restaurant.email` reste `null` : aucun bouton e-mail inactif ni adresse inventée n’est affiché. Les deux sections proposent le téléphone confirmé. Les liens `mailto:` avec les objets demandés sont préparés, mais leur destination réelle ne peut pas être vérifiée avant réception de l’adresse.
+L’adresse confirmée `thakyocornebarrieu@gmail.com` est centralisée dans `restaurant.email`. Les liens e-mail des sections Contact, Privatisation et Entreprises sont affichés avec leurs objets préremplis. Les liens téléphoniques restent disponibles.
+
+## Mise à jour du contact — 16 octobre 2026
+
+- `npm run lint`, `npm run build` et `NEXT_PUBLIC_SITE_URL=https://roberthoang31-ops.github.io npm run build:pages` réussis après ajout de l’adresse ; les builds incluent la vérification TypeScript.
+- Export statique servi sous `/thakyo-site/` et contrôlé dans Chromium via Playwright à 1440, 390 et 320 px de large.
+- Trois liens visibles vers `thakyocornebarrieu@gmail.com`, avec les objets exacts « Contact — Thakyo », « Demande de privatisation — Thakyo » et « Demande entreprise — Thakyo ».
+- Focus clavier vérifié sur chaque lien ; aucun débordement horizontal ni erreur JavaScript. Aucun e-mail envoyé.
+- Résultats de ce contrôle ciblé : `/workspace/thakyo-email-review/results.json`. Les contrôles détaillés ci-dessous documentent la livraison initiale de la carte, de la galerie et des événements.
 
 ## Carte et photographies fournies
 
@@ -62,6 +70,6 @@ Dossier `/workspace/thakyo-events-review/` :
 
 ## Limites et publication
 
-L’adresse e-mail reste à fournir. Safari et Firefox n’ont pas été testés. Les requêtes directes vers Google et Booqcloud sont toujours refusées par le proxy de développement (`CONNECT 403`) : les liens locaux sont corrects, mais leurs parcours externes ne sont pas validés ici. Aucune réservation, commande, transaction, émission d’e-mail ou appel réel n’a été effectué.
+Safari et Firefox n’ont pas été testés. Lors des contrôles initiaux, les requêtes directes vers Google et Booqcloud étaient refusées par le proxy de développement (`CONNECT 403`) : les liens locaux sont corrects, mais leurs parcours externes ne sont pas validés ici. Aucune réservation, commande, transaction, émission d’e-mail ou appel réel n’a été effectué. Les liens `mailto:` sont contrôlés ; la réception effective des messages n’a pas été testée.
 
 Aucune fusion dans `main`, aucun déploiement en production et aucun changement DNS n’ont été effectués. Les modifications sont sur la branche de travail. Le guide français des remplacements se trouve dans `docs/GUIDE-CONTENU.md` ; les instructions de publication restent dans `docs/DEPLOYMENT.md`.
